@@ -225,8 +225,91 @@ window.addEventListener("DOMContentLoaded", function() {
   let heroBox = document.querySelector("#hero");
   let villainBox = document.querySelector("#villain");
   let results = document.querySelector(".results");
-  // THIS FUNCTION ADDS THE BOX CONTENT FOR HERO AND VILLAIN, IF EITHER IS DESTROYED DISPLAY DESTROYED
-  function updateBoxes(hero, villain) {
+  let heroButton = document.querySelector("#hero button");
+  let villainButton = document.querySelector("#villain button");
+  let fightButton = document.querySelector("#fight-button");
+  let resetButton = document.querySelector("#reset-button");
+  let randomHero;
+  let randomVillain;
+  // initialize counter
+  let counter = 0;
+  // array of hero names
+  let heroNames = [
+    "Greihar",
+    "Sevendadia",
+    "Legiaw",
+    "Alelle",
+    "Qardotrem",
+    "Mebeth",
+    "Dwaligord",
+    "Afaedia",
+    "Edeajan",
+    "Mireliswen",
+    "Ulerigan",
+    "Rhebeth",
+    "Iberiand",
+    "Unoin",
+    "Rawyr",
+    "Rhalicia",
+    "Wild",
+    "Ulaleveth",
+    "Miraulith",
+    "Aloinia",
+    "Ulomab",
+    "Haaodia",
+    "Neinidd",
+    "Ibirien",
+    "Taot"
+  ];
+  // array of villain names
+  let villainNames = [
+    "Ocaojar",
+    "Bireria",
+    "Eowendaseth",
+    "Aroreswen",
+    "Pilimond",
+    "Ethilin",
+    "Acirakith",
+    "Dwarith",
+    "Umies",
+    "Thigoswen",
+    "Rherras",
+    "Frudia",
+    "Qaoric",
+    "Haelillan",
+    "Prardohan",
+    "Collan",
+    "Gralim",
+    "Larilimeth"
+  ];
+  // log results after each hit
+  function logResults(newResult) {
+    results.innerHTML += `<p>${newResult}</p>`;
+  }
+  // reset for new fight, i had to use .reload in order to bind events to the reset elements
+  function reset() {
+    document.location.reload();
+  }
+  // heroes have fewer attack points and higher luck
+  function generateHero(nameArr) {
+    return new Hero({
+      createdAt: new Date(),
+      dimensions: {
+        length: 1,
+        width: 1,
+        height: 1
+      },
+      healthPoints: Math.floor(Math.random() * 50),
+      name: nameArr[Math.floor(Math.random() * nameArr.length)],
+      team: "",
+      weapons: "",
+      language: "",
+      attackPoints: Math.floor(Math.random() * 20),
+      luck: Math.floor(Math.random() * 20)
+    });
+  }
+  // update content for hero square
+  function updateHero(hero) {
     if (hero.isDestroyed) {
       heroBox.innerHTML = `<h2>${hero.name}</h2><h2>DESTROYED</h2>`;
     } else {
@@ -234,6 +317,27 @@ window.addEventListener("DOMContentLoaded", function() {
         hero.healthPoints
       }</p><p>Attack Points: ${hero.attackPoints}</p><p>Luck: ${hero.luck}`;
     }
+  }
+  //villains are more likely to have more attack points and lower luck
+  function generateVillain(nameArr) {
+    return new Villain({
+      createdAt: new Date(),
+      dimensions: {
+        length: 1,
+        width: 1,
+        height: 1
+      },
+      healthPoints: Math.floor(Math.random() * 50),
+      name: nameArr[Math.floor(Math.random() * nameArr.length)],
+      team: "",
+      weapons: "",
+      language: "",
+      attackPoints: Math.floor(Math.random() * 30),
+      luck: Math.floor(Math.random() * 10)
+    });
+  }
+  // update content for villain square
+  function updateVillain(villain) {
     if (villain.isDestroyed) {
       villainBox.innerHTML = `<h2>${villain.name}</h2><h2>DESTROYED</h2>`;
     } else {
@@ -244,28 +348,46 @@ window.addEventListener("DOMContentLoaded", function() {
       }`;
     }
   }
-  // THIS FUNCTION WILL LOG RESULTS AFTER EACH HIT
-  function logResults(newResult) {
-    results.innerHTML += `<p>${newResult}</p>`;
-  }
-  // SET UP BOXES TO START AND SET COUNTER TO ZERO
-  updateBoxes(frodo, sauron);
-  counter = 0;
-  // WHEN THE BUTTON IS PRESSED, IF COUNTER IS EVEN THEN HERO ATTACKS, ELSE VILLAIN ATTACKS
-  let button = document.querySelector("button");
-  button.addEventListener("click", function() {
-    function battle(hero, villain) {
+  // battle
+  function battle(hero, villain) {
+    if (typeof hero !== "undefined" && typeof villain !== "undefined") {
       if (counter % 2 === 0) {
         let string = hero.attack(villain);
         logResults(string);
+        updateVillain(villain);
         counter++;
       } else {
         let string = villain.attack(hero);
         logResults(string);
+        updateHero(hero);
         counter++;
       }
-      updateBoxes(hero, villain);
+    } else {
+      logResults("You need an opponent to fight!");
     }
-    battle(frodo, sauron);
+  }
+
+  //EVENT LISTENERS
+  // generate a random hero when hero button pressed
+  heroButton.addEventListener("click", function() {
+    console.log("hero click");
+    randomHero = generateHero(heroNames);
+    updateHero(randomHero);
+    results.innerHTML = "";
+  });
+  // generate random villain when villain button is pressed
+  villainButton.addEventListener("click", function() {
+    console.log("villain click");
+    randomVillain = generateVillain(villainNames);
+    updateVillain(randomVillain);
+    results.innerHTML = "";
+  });
+
+  // WHEN THE FIGHT BUTTON IS PRESSED, IF COUNTER IS EVEN THEN HERO ATTACKS, ELSE VILLAIN ATTACKS
+  fightButton.addEventListener("click", function() {
+    battle(randomHero, randomVillain);
+  });
+  resetButton.addEventListener("click", function() {
+    reset();
   });
 });

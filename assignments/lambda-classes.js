@@ -8,7 +8,7 @@ class Person {
     this.gender = props.gender;
   }
   speak() {
-    console.log(`Hello my name is ${this.name}, I am from ${this.location}`);
+    return `Hello my name is ${this.name}, I am from ${this.location}`;
   }
 }
 
@@ -20,10 +20,10 @@ class Instructor extends Person {
     this.catchPhrase = instructAttrs.catchPhrase;
   }
   demo(subject) {
-    console.log(`Today we are learning about ${subject}`);
+    return `Today we are learning about ${subject}`;
   }
   grade(student, subject) {
-    console.log(`${student.name} receives a perfect score on ${subject}`);
+    return `${student.name} receives a perfect score on ${subject}`;
   }
   //stretch
   changeGrade(student) {
@@ -59,10 +59,10 @@ class Student extends Person {
     this.favSubjects.forEach(element => console.log(element));
   }
   PRAssignment(subject) {
-    console.log(`${this.name} has submitted a PR for ${subject}`);
+    return `${this.name} has submitted a PR for ${subject}`;
   }
   sprintChallenge(subject) {
-    console.log(`${this.name} has begun sprint challenge on ${subject}`);
+    return `${this.name} has begun sprint challenge on ${subject}`;
   }
   // stretch: I added an isGraduated property so that I could use a loop to grade the student later
   graduate() {
@@ -82,12 +82,10 @@ class ProjectManager extends Instructor {
     this.favInstructor = pmAttrs.favInstructor;
   }
   standUp(slackChannel) {
-    console.log(
-      `${this.name} announces to ${slackChannel} @channel standy times!`
-    );
+    return `${this.name} announces to ${slackChannel} @channel standy times!`;
   }
   debugsCode(student, subject) {
-    console.log(`${this.name} debugs ${student.name}'s code on ${subject}`);
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
   }
 }
 
@@ -136,7 +134,7 @@ console.log(randomPerson.name);
 console.log(randomPerson.age);
 console.log(randomPerson.location);
 console.log(randomPerson.gender);
-randomPerson.speak();
+console.log(randomPerson.speak());
 
 //instructor tests
 console.log(randomInstructor.name);
@@ -146,9 +144,9 @@ console.log(randomInstructor.gender);
 console.log(randomInstructor.specialty);
 console.log(randomInstructor.favLanguage);
 console.log(randomInstructor.catchPhrase);
-randomInstructor.speak();
-randomInstructor.demo("JS");
-randomInstructor.grade(randomStudent, "JS");
+console.log(randomInstructor.speak());
+console.log(randomInstructor.demo("JS"));
+console.log(randomInstructor.grade(randomStudent, "JS"));
 
 // student tests
 console.log(randomStudent.name);
@@ -158,10 +156,10 @@ console.log(randomStudent.gender);
 console.log(randomStudent.className);
 console.log(randomStudent.previousBackground);
 console.log(randomStudent.favSubjects);
-randomStudent.speak();
-randomStudent.listSubjects();
-randomStudent.PRAssignment("JS");
-randomStudent.sprintChallenge("JS");
+console.log(randomStudent.speak());
+console.log(randomStudent.listSubjects());
+console.log(randomStudent.PRAssignment("JS"));
+console.log(randomStudent.sprintChallenge("JS"));
 
 // pm tests
 console.log(randomPM.name);
@@ -170,11 +168,11 @@ console.log(randomPM.location);
 console.log(randomPM.gender);
 console.log(randomPM.gradClassName);
 console.log(randomPM.favInstructor);
-randomPM.speak();
-randomPM.demo("JS");
-randomPM.grade(randomStudent, "JS");
-randomPM.standUp("random channel");
-randomPM.debugsCode(randomStudent, "JS");
+console.log(randomPM.speak());
+console.log(randomPM.demo("JS"));
+console.log(randomPM.grade(randomStudent, "JS"));
+console.log(randomPM.standUp("random channel"));
+console.log(randomPM.debugsCode(randomStudent, "JS"));
 
 // stretch
 while (!randomStudent.isGraduated) {

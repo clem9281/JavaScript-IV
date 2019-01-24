@@ -22,6 +22,12 @@ body {
   width: 100%;
   text-align: center;
 }
+.character button {
+  border: none;
+  background: white;
+  width: 75%;
+  font-size: 1.2rem;
+}
 #hero {
   background: blue;
 }
@@ -31,11 +37,15 @@ body {
 .fight {
   width: 100%;
   text-align: center;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; */
 }
 button {
-  margin: 20px;
+  display: block;
+  margin: 20px auto;
   height: 60px;
-  width: 30%;
+  width: 45%;
   cursor: pointer;
 }
 a {
