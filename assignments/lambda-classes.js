@@ -25,6 +25,25 @@ class Instructor extends Person {
   grade(student, subject) {
     console.log(`${student.name} receives a perfect score on ${subject}`);
   }
+  //stretch
+  changeGrade(student) {
+    // this math should give us either 0 or 1 and zero evaluates to false
+    if (Math.floor(Math.random() * 2)) {
+      student.grade += 10;
+      console.log(
+        `${this.name} gave ${student.name} 10pts! Student now has a grade of ${
+          student.grade
+        }.`
+      );
+    } else {
+      student.grade -= 10;
+      console.log(
+        `${this.name} took 10pts from ${
+          student.name
+        }! Student now has a grade of ${student.grade}.`
+      );
+    }
+  }
 }
 
 class Student extends Person {
@@ -33,6 +52,8 @@ class Student extends Person {
     this.previousBackground = studentAttrs.previousBackground;
     this.className = studentAttrs.className;
     this.favSubjects = studentAttrs.favSubjects;
+    this.grade = studentAttrs.grade;
+    this.isGraduated = false;
   }
   listSubjects() {
     this.favSubjects.forEach(element => console.log(element));
@@ -42,6 +63,15 @@ class Student extends Person {
   }
   sprintChallenge(subject) {
     console.log(`${this.name} has begun sprint challenge on ${subject}`);
+  }
+  // stretch: I added an isGraduated property so that I could use a loop to grade the student later
+  graduate() {
+    if (this.grade > 70) {
+      this.isGraduated = true;
+      console.log(`${this.name} has enough points to graduate!`);
+    } else {
+      console.log(`${this.name} does not have enough points to graduate.`);
+    }
   }
 }
 
@@ -87,7 +117,8 @@ let randomStudent = new Student({
   gender: "F",
   previousBackground: "none",
   className: "Web17",
-  favSubjects: ["JS", "HTML", "Preprocessing", "react"]
+  favSubjects: ["JS", "HTML", "Preprocessing", "react"],
+  grade: 60
 });
 
 // project manager
@@ -144,3 +175,9 @@ randomPM.demo("JS");
 randomPM.grade(randomStudent, "JS");
 randomPM.standUp("random channel");
 randomPM.debugsCode(randomStudent, "JS");
+
+// stretch
+while (!randomStudent.isGraduated) {
+  randomPM.changeGrade(randomStudent);
+  randomStudent.graduate();
+}
