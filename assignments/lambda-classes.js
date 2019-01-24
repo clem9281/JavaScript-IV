@@ -157,7 +157,7 @@ console.log(randomStudent.className);
 console.log(randomStudent.previousBackground);
 console.log(randomStudent.favSubjects);
 console.log(randomStudent.speak());
-console.log(randomStudent.listSubjects());
+randomStudent.listSubjects();
 console.log(randomStudent.PRAssignment("JS"));
 console.log(randomStudent.sprintChallenge("JS"));
 

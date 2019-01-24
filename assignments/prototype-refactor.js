@@ -333,7 +333,7 @@ window.addEventListener("DOMContentLoaded", function() {
       weapons: "",
       language: "",
       attackPoints: Math.floor(Math.random() * 30),
-      luck: Math.floor(Math.random() * 10)
+      luck: Math.floor(Math.random() * 15)
     });
   }
   // update content for villain square
