@@ -387,7 +387,5 @@ window.addEventListener("DOMContentLoaded", function() {
   fightButton.addEventListener("click", function() {
     battle(randomHero, randomVillain);
   });
-  resetButton.addEventListener("click", function() {
-    reset();
-  });
+  resetButton.addEventListener("click", reset);
 });
