@@ -1,0 +1,60 @@
+body {
+}
+.container {
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+.character {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  width: 40%;
+  align-content: center;
+  flex-wrap: wrap;
+  color: white;
+}
+.character p,
+.character h2 {
+  width: 100%;
+  text-align: center;
+}
+.character button {
+  border: none;
+  background: white;
+  width: 75%;
+  font-size: 1.2rem;
+}
+#hero {
+  background: blue;
+}
+#villain {
+  background: red;
+}
+.fight {
+  width: 100%;
+  text-align: center;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; */
+}
+button {
+  display: block;
+  margin: 20px auto;
+  height: 60px;
+  width: 45%;
+  cursor: pointer;
+}
+a {
+  color: white;
+  text-decoration: none;
+}
+@media (max-width: 500px) {
+  .character {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
